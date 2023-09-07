@@ -1,0 +1,95 @@
+{
+  "name": "devgen-joe-frazier-demo",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/devgen-joe-frazier-demo/src",
+  "prefix": "devgen-joe-frazier-demo",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/devgen-joe-frazier-demo",
+        "index": "apps/devgen-joe-frazier-demo/src/index.html",
+        "main": "apps/devgen-joe-frazier-demo/src/main.ts",
+        "polyfills": "apps/devgen-joe-frazier-demo/src/polyfills.ts",
+        "tsConfig": "apps/devgen-joe-frazier-demo/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/devgen-joe-frazier-demo/src/favicon.ico",
+          "apps/devgen-joe-frazier-demo/src/assets"
+        ],
+        "styles": ["apps/devgen-joe-frazier-demo/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/devgen-joe-frazier-demo/src/environments/environment.ts",
+              "with": "apps/devgen-joe-frazier-demo/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "devgen-joe-frazier-demo:build:production"
+        },
+        "development": {
+          "browserTarget": "devgen-joe-frazier-demo:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "devgen-joe-frazier-demo:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/devgen-joe-frazier-demo/src/**/*.ts",
+          "apps/devgen-joe-frazier-demo/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/devgen-joe-frazier-demo"],
+      "options": {
+        "jestConfig": "apps/devgen-joe-frazier-demo/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
